@@ -1,0 +1,87 @@
+group 'com.freeplace'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.0'
+    }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'com.bmuschko.tomcat'
+
+war.baseName = 'cloudIDE'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+
+    //tomcat
+    def tomcatVersion = '7.0.57'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+    "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
+    tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
+        exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+    }
+
+    // servlets/ jstl
+    compile "javax.servlet:javax.servlet-api:3.1.0"
+    compile "javax.servlet.jsp:javax.servlet.jsp-api:2.3.1"
+    compile "javax.servlet:jstl:1.2"
+
+    //jdbc
+    def mySqlConnectorVersion = '5.1.31'
+    compile "mysql:mysql-connector-java:${mySqlConnectorVersion}"
+
+    // hibernate
+    def hibernateVersion = '4.3.6.Final'
+    compile "org.hibernate:hibernate-core:${hibernateVersion}"
+
+    // spring
+    def springVersion = '4.2.2.RELEASE'
+    compile "org.springframework:spring-core:${springVersion}"
+    compile "org.springframework:spring-web:${springVersion}"
+    compile "org.springframework:spring-webmvc:${springVersion}"
+    compile "org.springframework:spring-tx:${springVersion}"
+    compile "org.springframework:spring-orm:${springVersion}"
+
+    // spring security
+    def springSecurityVersion = '3.2.5.RELEASE';
+    compile "org.springframework.security:spring-security-core:${springSecurityVersion}"
+    compile "org.springframework.security:spring-security-web:${springSecurityVersion}"
+    compile "org.springframework.security:spring-security-config:${springSecurityVersion}"
+
+    //test
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile "org.springframework:spring-test:${springVersion}"
+    def h2Version = '1.4.187'
+    testCompile "com.h2database:h2:${h2Version}"
+    def dbUnitVersion = '2.2'
+    testCompile "dbunit:dbunit:${dbUnitVersion}"
+
+    sourceSets {
+        unitTest {
+            java {
+                srcDirs = ["test"]  // Note @Peter's comment below
+            }
+        }
+    }
+
+}
+tomcatRun.contextPath = '/'
+tomcatRunWar.contextPath = '/'
+
+task full(dependsOn: [test, tomcatRunWar]) << {
+    println 'Done'
+}
+
