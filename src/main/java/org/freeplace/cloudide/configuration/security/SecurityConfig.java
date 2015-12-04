@@ -39,11 +39,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        String accessHasRoles = Arrays.stream(Role.values())
-                                    .map(role -> "hasRole('" + role.name() + "')").collect(Collectors.joining(" or "));
         http.authorizeRequests()
                 .antMatchers(Path.SLASH + Page.MAIN + Path.SLASH + SECURITY_ALL_NESTED_PAGES)
-                .access(accessHasRoles)
+                .access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
                 .and().formLogin();
     }
 }

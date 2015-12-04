@@ -1,6 +1,7 @@
 package org.freeplace.cloudide.configuration.security;
 
 import org.freeplace.cloudide.applicationinfo.ApplicationData;
+import org.freeplace.cloudide.model.Role;
 import org.freeplace.cloudide.model.User;
 import org.freeplace.cloudide.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,7 @@ import java.util.Collection;
 @Service
 public class AuthorizationService implements UserDetailsService {
 
-    public static final String QUERY_GET_CREDENTIALS = "SELECT password, role_id FROM user WHERE login = ?";
-
-    @Autowired
-    private UserService userService;
+    public static final String QUERY_GET_CREDENTIALS = "SELECT "+ User.COLUMN_PASSWORD + ", "+Role.COLUMN_NAME + " FROM user u INNER JOIN role r ON u.id_role = r.id_role WHERE login = ?";
 
     @Autowired
     private DataSource dataSource;
@@ -42,15 +40,15 @@ public class AuthorizationService implements UserDetailsService {
             statement.setString(1,login);
             ResultSet result = statement.executeQuery();
 
-            if (result.next() == false) {
+            if (!result.next()) {
                 throw new UsernameNotFoundException("User not found");
             }
 
             String password = result.getString(User.COLUMN_PASSWORD);
-            int roleId = result.getInt(User.COLUMN_ROLE_ID);
+            String roleName = result.getString(Role.COLUMN_NAME);
 
             Collection<GrantedAuthority> authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority(Role.INSTANCE.getRoleNameById(roleId)));
+            authorities.add(new SimpleGrantedAuthority(roleName));
             return new org.springframework.security.core.userdetails.User(
                     login, password, true, true, true, true, authorities);
         } catch (UsernameNotFoundException e) {

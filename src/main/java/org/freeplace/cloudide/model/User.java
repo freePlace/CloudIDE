@@ -10,7 +10,6 @@ import javax.persistence.*;
 public class User extends AbstractModel{
     public static final String TABLE_NAME = "user";
     public static final String COLUMN_ID = "id_user";
-    public static final String COLUMN_ROLE_ID = "id_role";
     public static final String COLUMN_FIRST_NAME = "first_name";
     public static final String COLUMN_LOGIN = "login";
     public static final String COLUMN_PASSWORD = "password";
@@ -20,9 +19,6 @@ public class User extends AbstractModel{
     @Column(name = COLUMN_ID)
     private int id;
 
-    @Column(name = COLUMN_ROLE_ID, nullable = false)
-    private int roleId;
-
     @Column(name = COLUMN_FIRST_NAME, nullable = false)
     private String firstName;
 
@@ -31,6 +27,10 @@ public class User extends AbstractModel{
 
     @Column(name = COLUMN_PASSWORD, nullable = false)
     private String password;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = Role.COLUMN_ID, nullable = false)
+    private Role role;
 
     public int getId() {
         return id;
@@ -64,11 +64,11 @@ public class User extends AbstractModel{
         this.password = password;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
