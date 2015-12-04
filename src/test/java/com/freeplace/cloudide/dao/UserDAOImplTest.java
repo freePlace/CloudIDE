@@ -6,64 +6,65 @@ package com.freeplace.cloudide.dao;
 import org.dbunit.dataset.CompositeDataSet;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
+import org.freeplace.cloudide.dao.ProgrammingLanguageDAO;
+import org.freeplace.cloudide.dao.RoleDAO;
 import org.freeplace.cloudide.dao.UserDAO;
+import org.freeplace.cloudide.model.ProgrammingLanguage;
+import org.freeplace.cloudide.model.Role;
 import org.freeplace.cloudide.model.User;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public class UserDAOImplTest extends EntityDAOImplTest {
 
     @Autowired
-    UserDAO userDao;
+    private UserDAO userDAO;
 
     @Override
     protected IDataSet getDataSet() throws Exception {
         IDataSet[] datasets = {
+                new FlatXmlDataSet(this.getClass().getClassLoader().getResourceAsStream("Role.xml")),
                 new FlatXmlDataSet(this.getClass().getClassLoader().getResourceAsStream("User.xml")) };
         return new CompositeDataSet(datasets);
     }
 
     @Test
     public void findById() {
-        Assert.assertNotNull(userDao.findById(1));
-        Assert.assertNull(userDao.findById(3));
+        Assert.assertNotNull(userDAO.findById(1));
+        Assert.assertNull(userDAO.findById(3));
     }
 
     @Test
     public void saveUser() {
-        userDao.saveUser(getSampleUser());
-        Assert.assertEquals(userDao.findAllUsers().size(), 3);
-    }
-
-    @Test
-    public void deleteEmployeeBySsn() {
-        userDao.deleteUserByLogin("ADMIN");
-        Assert.assertEquals(userDao.findAllUsers().size(), 1);
-    }
-
-    @Test
-    public void deleteEmployeeByInvalidSsn() {
-        userDao.deleteUserByLogin("qwerty");
-        Assert.assertEquals(userDao.findAllUsers().size(), 2);
+        userDAO.create(getSampleUser());
+        Assert.assertEquals(userDAO.findAll().size(), 3);
     }
 
     @Test
     public void findAllEmployees() {
-        Assert.assertEquals(userDao.findAllUsers().size(), 2);
+        Assert.assertEquals(userDAO.findAll().size(), 2);
     }
 
     @Test
     public void findEmployeeBySsn() {
-        Assert.assertNotNull(userDao.findUserByLogin("ADMIN"));
-        Assert.assertNull(userDao.findUserByLogin("qwerty"));
+        Assert.assertNotNull(userDAO.findUserByLogin("ADMIN"));
+        Assert.assertNull(userDAO.findUserByLogin("qwerty"));
     }
 
     public User getSampleUser() {
         User user = new User();
-        user.setFirstName("Karen");
-        user.setLogin("KarenLogin");
+        user.setFirstName("FirstName");
+        user.setLogin("Login");
         user.setPassword("3333");
+        Role r = new Role();
+        r.setId(1);
+        r.setName("ROLE_USER");
+
+        user.setRole(r);
         return user;
     }
 

@@ -18,11 +18,7 @@ public class UserService {
     @Autowired
     private UserDAOImpl userDAO;
 
-    public List<User> findAllUsers() {
-        return userDAO.findAllUsers();
-    }
-
-    public User findByLogin(String login) {
-        return new UserDAOImpl().findUserByLogin(login);
+    public List<User> findAll() {
+        return userDAO.findAll();
     }
 }

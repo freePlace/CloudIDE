@@ -8,9 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <title></title>
 </head>
 <body>
+<div ng-app="main">
+  <p>Name: <input type="text" ng-model="name"></p>
+  <p ng-bind="name"></p>
+</div>
 <a href='logout'> LOGOUT</a>
 
 hello from main!
