@@ -22,9 +22,4 @@ public enum Role {
         }
         return null;
     }
-
-    public String [] getMainPageHasRolesAsStrings() {
-        return new String[]{"hasRole('" + Role.ROLE_ADMIN.name() + "')",
-                            "hasRole('" + Role.ROLE_USER.name() + "')"};
-    }
 }
