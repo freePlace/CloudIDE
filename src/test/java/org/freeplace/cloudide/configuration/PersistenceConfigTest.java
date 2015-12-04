@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.freeplace.cloudide.applicationinfo.ApplicationData;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({ "org.freeplace.cloudide.dao" })
+@ComponentScan({ApplicationData.PACKAGE_DAO})
 public class PersistenceConfigTest {
 
     @Autowired
@@ -30,7 +31,7 @@ public class PersistenceConfigTest {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[] { "org.freeplace.cloudide.model" });
+        sessionFactory.setPackagesToScan(new String[] { ApplicationData.PACKAGE_MODEL });
         sessionFactory.setHibernateProperties(getProperties());
         return sessionFactory;
     }

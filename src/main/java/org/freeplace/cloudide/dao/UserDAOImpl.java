@@ -27,7 +27,7 @@ public class UserDAOImpl extends AbstractDAO<Integer, User> implements UserDAO {
     @Override
     public void deleteUserByLogin(String login) {
         Query query = getSession().createSQLQuery("delete from user where login = :login");
-        query.setString("login", login);
+        query.setString(User.COLUMN_LOGIN, login);
         query.executeUpdate();
 
     }
@@ -42,7 +42,7 @@ public class UserDAOImpl extends AbstractDAO<Integer, User> implements UserDAO {
     @Override
     public User findUserByLogin(String login) {
         Criteria criteria = createEntityCriteria();
-        criteria.add(Restrictions.eq("login", login));
+        criteria.add(Restrictions.eq(User.COLUMN_LOGIN, login));
         return (User) criteria.uniqueResult();
     }
 

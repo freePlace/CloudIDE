@@ -69,6 +69,11 @@ dependencies {
     def dbUnitVersion = '2.2'
     testCompile "dbunit:dbunit:${dbUnitVersion}"
 
+    //utils
+    compile "com.google.guava:guava:19.0-rc3";
+    compile "org.apache.commons:commons-lang3:3.0";
+
+
     sourceSets {
         unitTest {
             java {

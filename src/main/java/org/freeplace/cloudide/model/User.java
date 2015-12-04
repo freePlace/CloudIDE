@@ -7,15 +7,17 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = User.TABLE_NAME)
-public class User {
+public class User extends AbstractModel{
     public static final String TABLE_NAME = "user";
-    public static final String COLUMN_ROLE_ID = "role_id";
+    public static final String COLUMN_ID = "id_user";
+    public static final String COLUMN_ROLE_ID = "id_role";
     public static final String COLUMN_FIRST_NAME = "first_name";
     public static final String COLUMN_LOGIN = "login";
     public static final String COLUMN_PASSWORD = "password";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = COLUMN_ID)
     private int id;
 
     @Column(name = COLUMN_ROLE_ID, nullable = false)

@@ -32,7 +32,7 @@ public class AppController {
 
     @RequestMapping(value = Path.SLASH, method = RequestMethod.GET)
     public String getWelcomePage(ModelMap model) {
-     //   model.addAttribute(Attribute.USERS, userService.findAllUsers());
+        model.addAttribute(Attribute.USERS, userService.findAllUsers());
         return Path.REDIRECT + Page.MAIN;
     }
 
