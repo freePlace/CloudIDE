@@ -34,8 +34,7 @@ public class AuthorizationService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        try {
-            Connection connection = dataSource.getConnection();
+        try(Connection connection = dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(QUERY_GET_CREDENTIALS);
             statement.setString(1,login);
             ResultSet result = statement.executeQuery();
@@ -55,6 +54,8 @@ public class AuthorizationService implements UserDetailsService {
             throw new EntityNotFoundException(e.getCause().getMessage());
         } catch (SQLException e) {
             throw new EntityNotFoundException(e.getCause().getMessage());
+        } finally {
+
         }
         /*
         UserAccount userAccount = user.getUserAccount();

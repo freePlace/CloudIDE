@@ -2,6 +2,8 @@ package org.freeplace.cloudide.service;
 
 import org.freeplace.cloudide.dao.ProgrammingLanguageDAOImpl;
 import org.freeplace.cloudide.model.ProgrammingLanguage;
+import org.freeplace.cloudide.model.ProgrammingLanguageKeyword;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,14 @@ public class ProgrammingLanguageService {
     private ProgrammingLanguageDAOImpl programmingLanguageDAO;
 
     public List<ProgrammingLanguage> findAll() {
+        List<ProgrammingLanguage> programmingLanguages = programmingLanguageDAO.findAll();
+        programmingLanguages.forEach(programmingLanguage -> Hibernate.initialize(programmingLanguage.getProgrammingLanguageKeywords()));
         return programmingLanguageDAO.findAll();
+    }
+
+    public List<ProgrammingLanguageKeyword> findProgramingLanguageKeywordsByProgrammingLanguage(int languageId) {
+        ProgrammingLanguage programmingLanguage = programmingLanguageDAO.findById(languageId);
+        Hibernate.initialize(programmingLanguage.getProgrammingLanguageKeywords());
+        return programmingLanguage.getProgrammingLanguageKeywords();
     }
 }

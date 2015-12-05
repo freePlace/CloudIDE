@@ -7,6 +7,7 @@ import org.freeplace.cloudide.applicationinfo.ApplicationData;
 import org.freeplace.cloudide.applicationinfo.Path;
 import org.freeplace.cloudide.configuration.AppConfig;
 import org.freeplace.cloudide.controller.Page;
+import org.freeplace.cloudide.controller.webservice.AbstractWebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -40,8 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers(Path.SLASH + AbstractWebService.BASE_PATH + Path.SLASH + SECURITY_ALL_NESTED_PAGES).permitAll()
                 .antMatchers(Path.SLASH + Page.MAIN + Path.SLASH + SECURITY_ALL_NESTED_PAGES)
                 .access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
-                .and().formLogin();
+                .and().formLogin().and().csrf().disable();
     }
 }

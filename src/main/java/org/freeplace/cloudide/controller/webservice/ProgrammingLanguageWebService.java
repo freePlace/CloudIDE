@@ -1,5 +1,6 @@
 package org.freeplace.cloudide.controller.webservice;
 
+import org.freeplace.cloudide.applicationinfo.Path;
 import org.freeplace.cloudide.dao.ProgrammingLanguageDAOImpl;
 import org.freeplace.cloudide.model.ProgrammingLanguage;
 import org.freeplace.cloudide.service.ProgrammingLanguageService;
@@ -15,9 +16,9 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(ProgrammingLanguageWebService.SERVICE_PATH)
-public class ProgrammingLanguageWebService {
+public class ProgrammingLanguageWebService extends AbstractWebService{
 
-    public static final String SERVICE_PATH = "/programingLanguage";
+    public static final String SERVICE_PATH = BASE_PATH + Path.SLASH + "programmingLanguage";
 
     @Autowired
     private ProgrammingLanguageService programmingLanguageService;
@@ -32,7 +33,7 @@ public class ProgrammingLanguageWebService {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public ResponseEntity addLanguage(@RequestBody String coordinate) {
+    public ResponseEntity addLanguage(@RequestBody String language) {
          //
         return new ResponseEntity<Long>(1l, HttpStatus.OK);
     }
@@ -40,7 +41,7 @@ public class ProgrammingLanguageWebService {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public void deleteCoordinate(@PathVariable("id") Long id) {
+    public void deleteLanguage(@PathVariable("id") Long id) {
        // coordinateRepository.delete(id);
     }
 }
