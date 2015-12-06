@@ -35,7 +35,7 @@
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setMode("ace/mode/java");
 </script>
-<textarea rows="10" cols="180" id="inputStreamResult" disabled >
+<textarea rows="10" cols="180" id="executionResult" disabled >
 </textarea>
 <script src="/resources/js/main.js">
 </script>

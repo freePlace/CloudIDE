@@ -28,13 +28,23 @@ public class FileUtils {
         }
     }
 
-    public static String createFileName(String data, List<ProgrammingLanguageKeyword> keywords) {
-        Scanner sc = new Scanner(data);
-        List<String> keywordNames = keywords.stream().map(keyword -> keyword.getName()).collect(Collectors.toList());
-        while(sc.hasNext()) {
-            String current  = sc.next();
-            if(!keywordNames.contains(current)) return current;
+    // todo: change to more general form
+    public static String createFileName(String data) {
+        Scanner scanner = new Scanner(data);
+        while(scanner.hasNext()) {
+            if(scanner.hasNext("class")) {
+                scanner.next();
+                if(scanner.hasNext()) {
+                    String tmpClassName = scanner.next();
+                    if(scanner.hasNext() && scanner.next().equals("{")) {
+                        return tmpClassName;
+                    }
+                }
+            } else {
+                scanner.next();
+            }
         }
+        scanner.close();
         return null;
     }
 }

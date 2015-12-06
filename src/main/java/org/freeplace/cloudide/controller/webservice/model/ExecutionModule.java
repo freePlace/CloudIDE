@@ -11,6 +11,7 @@ public class ExecutionModule {
     private String language;
     private int compilationResult;
     private String inputStreamResult;
+    private String errorStreamResult;
 
     public String getExecutableCode() {
         return executableCode;
@@ -42,5 +43,13 @@ public class ExecutionModule {
 
     public void setInputStreamResult(String inputStreamResult) {
         this.inputStreamResult = inputStreamResult;
+    }
+
+    public String getErrorStreamResult() {
+        return errorStreamResult;
+    }
+
+    public void setErrorStreamResult(String errorStreamResult) {
+        this.errorStreamResult = errorStreamResult;
     }
 }
