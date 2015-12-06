@@ -23,7 +23,7 @@ public class ProgrammingLanguageService {
     public List<ProgrammingLanguage> findAll() {
         List<ProgrammingLanguage> programmingLanguages = programmingLanguageDAO.findAll();
         programmingLanguages.forEach(programmingLanguage -> Hibernate.initialize(programmingLanguage.getProgrammingLanguageKeywords()));
-        return programmingLanguageDAO.findAll();
+        return programmingLanguages;
     }
 
     public List<ProgrammingLanguageKeyword> findProgramingLanguageKeywordsByProgrammingLanguage(int languageId) {

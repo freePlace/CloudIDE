@@ -9,45 +9,21 @@
 <html>
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link href="resources/css/main.css" rel="stylesheet" />
     <title></title>
 </head>
 <body ng-app="main">
 <!-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
 <div ng-controller="MyController" >
-<button ng-click="myData.doClick(item, $event)">Send AJAX Request</button>
-Data from server: {{myData.fromServer}}
-<button ng-click="myData.click(item, $event)">Send data</button>
-<a href='logout'> LOGOUT</a>
+    <button ng-click="myData.click(item, $event)">Send data</button>
+    <a href='logout'> LOGOUT</a>
 </div>
-<textarea rows="10" cols="45" name="text" id="executableCode">
+<textarea rows="10" cols="180" name="text" id="executableCode">
 </textarea>
-<script>
-    angular.module("main", [])
-            .controller("MyController", function($scope, $http) {
-                $scope.myData = {};
-                $scope.myData.doClick = function(item, event) {
-
-                    var responsePromise = $http.get("/service/programmingLanguage");
-
-                    responsePromise.success(function(data, status, headers, config) {
-                        alert(data);
-                        $scope.myData.fromServer = data;
-                    });
-                    responsePromise.error(function(data, status, headers, config) {
-                        alert("AJAX failed!" + data + " " + status);
-                    });
-                }
-
-                $scope.myData.click = function(item, event) {
-                    var responsePromise = $http.post("/service/execute",document.getElementById("executableCode"));
-                    responsePromise.success(function(data, status, headers, config) {
-                        alert(data);
-                    });
-                    responsePromise.error(function(data, status, headers, config) {
-                        alert("AJAX failed!" + data + " " + status);
-                    });
-                }
-            } );
+<textarea rows="10" cols="180" name="text" id="inputStreamResult" disabled >
+</textarea>
+<script src="/resources/js/main.js">
 </script>
 </body>
 </html>

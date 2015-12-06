@@ -1,6 +1,7 @@
 package org.freeplace.cloudide.controller.webservice;
 
 import org.freeplace.cloudide.applicationinfo.Path;
+import org.freeplace.cloudide.model.ExecutionModule;
 import org.freeplace.cloudide.service.ExecutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,10 +20,9 @@ public class ExecutorWebService extends  AbstractWebService{
     private ExecutorService executorService;
 
     @RequestMapping(method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.ACCEPTED)
     @ResponseBody
-    public ResponseEntity execute(@RequestBody String code) {
-        // object should contain code, language, etc
-        return new ResponseEntity<String>(executorService.execute(code, 1), HttpStatus.OK);
+    public ResponseEntity execute(@RequestBody ExecutionModule executionModule) {
+        executorService.execute(executionModule);
+        return new ResponseEntity<ExecutionModule>(executionModule, HttpStatus.OK);
     }
 }
