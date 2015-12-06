@@ -1,11 +1,9 @@
 package org.freeplace.cloudide.configuration.security;
 
-import org.freeplace.cloudide.applicationinfo.ApplicationData;
 import org.freeplace.cloudide.model.Role;
 import org.freeplace.cloudide.model.User;
-import org.freeplace.cloudide.service.UserService;
+import org.freeplace.cloudide.model.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,7 +25,16 @@ import java.util.Collection;
 @Service
 public class AuthorizationService implements UserDetailsService {
 
-    public static final String QUERY_GET_CREDENTIALS = "SELECT "+ User.COLUMN_PASSWORD + ", "+Role.COLUMN_NAME + " FROM user u INNER JOIN role r ON u.id_role = r.id_role WHERE login = ?";
+    public static final String QUERY_GET_CREDENTIALS =
+            "SELECT "+ User.COLUMN_PASSWORD + ", "+Role.COLUMN_NAME +
+            ", " + UserAccount.COLUMN_ENABLED +
+            ", " + UserAccount.COLUMN_ACCOUNT_NON_EXPIRED +
+            ", " + UserAccount.COLUMN_CREDENTIALS_NON_EXPIRED +
+            ", " + UserAccount.COLUMN_ACCOUNT_NON_LOCKED +
+            " FROM user u " +
+            "INNER JOIN role r ON u.id_role = r.id_role " +
+            "INNER JOIN user_account ua ON u.id_user = ua.id_user " +
+            "WHERE login = ?";
 
     @Autowired
     private DataSource dataSource;
@@ -45,22 +52,20 @@ public class AuthorizationService implements UserDetailsService {
 
             String password = result.getString(User.COLUMN_PASSWORD);
             String roleName = result.getString(Role.COLUMN_NAME);
+            boolean isAccountEnabled = result.getBoolean(UserAccount.COLUMN_ENABLED);
+            boolean isAccountNonExpired = result.getBoolean(UserAccount.COLUMN_ACCOUNT_NON_EXPIRED);
+            boolean isCredentialsNonExpired = result.getBoolean(UserAccount.COLUMN_CREDENTIALS_NON_EXPIRED);
+            boolean isColumnAccountNonLocked = result.getBoolean(UserAccount.COLUMN_ACCOUNT_NON_LOCKED);
 
             Collection<GrantedAuthority> authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority(roleName));
             return new org.springframework.security.core.userdetails.User(
-                    login, password, true, true, true, true, authorities);
+                    login, password, isAccountEnabled, isAccountNonExpired,
+                    isCredentialsNonExpired, isColumnAccountNonLocked, authorities);
         } catch (UsernameNotFoundException e) {
             throw new EntityNotFoundException(e.getCause().getMessage());
         } catch (SQLException e) {
             throw new EntityNotFoundException(e.getCause().getMessage());
         }
-        /*
-        UserAccount userAccount = user.getUserAccount();
-        boolean enabled = userAccount.getIsEnabled();
-        boolean accountNonExpired = !userAccount.getIsExpired();
-        boolean credentialsNonExpired = !userAccount.getIsExpiredCredentials();
-        boolean accountNonLocked = !userAccount.getIsLocked();
-        */
     }
 }

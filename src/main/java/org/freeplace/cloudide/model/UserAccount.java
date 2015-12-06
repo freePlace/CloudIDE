@@ -8,14 +8,14 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = UserAccount.TABLE_NAME)
-public class UserAccount {
+public class UserAccount extends AbstractModel{
 
-    public static final String TABLE_NAME = "userAccount";
-    public static final String COLUMN_ID = "id_userAccount";
+    public static final String TABLE_NAME = "user_account";
+    public static final String COLUMN_ID = "id_user_account";
     public static final String COLUMN_ENABLED = "enabled";
-    public static final String COLUMN_ACCOUNT_NON_EXPIRED = "accountNonExpired";
-    public static final String COLUMN_CREDENTIALS_NON_EXPIRED = "credentialsNonExpired";
-    public static final String COLUMN_ACCOUNT_NON_LOCKED = "accountNonLocked";
+    public static final String COLUMN_ACCOUNT_NON_EXPIRED = "account_non_expired";
+    public static final String COLUMN_CREDENTIALS_NON_EXPIRED = "credentials_non_expired";
+    public static final String COLUMN_ACCOUNT_NON_LOCKED = "account_non_locked";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +34,8 @@ public class UserAccount {
     @Column(name = COLUMN_ACCOUNT_NON_LOCKED)
     private boolean accountNonLocked;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "userAccount")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = User.COLUMN_ID, unique = true, nullable = false)
     private User user;
 
     public int getId() {

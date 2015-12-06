@@ -32,8 +32,7 @@ public class User extends AbstractModel{
     @JoinColumn(name = Role.COLUMN_ID, nullable = false)
     private Role role;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = UserAccount.COLUMN_ID, unique = true, nullable = false, updatable = false)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = TABLE_NAME)
     private UserAccount userAccount;
 
     public int getId() {

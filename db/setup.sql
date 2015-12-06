@@ -1,10 +1,18 @@
+DELETE FROM user_account;
+DELETE FROM user;
+DELETE FROM role;
+DELETE FROM programming_language_programming_language_keyword;
+DELETE FROM programming_language_keyword;
+DELETE FROM programming_language;
+
 INSERT INTO role(id_role, name) VALUES(1,'ROLE_ADMIN');
 INSERT INTO role(id_role, name) VALUES(2,'ROLE_USER');
 
-INSERT INTO useraccount(id_userAccount, accountNonExpired, accountNonLocked, credentialsNonExpired, enabled)
-VALUES(1, 1, 1, 1, 1);
+INSERT INTO user(id_user, first_name, login, password, id_role) VALUES(1, 'dev','dev','dev',1);
 
-INSERT INTO user(id_user, first_name, login, password, id_role, id_userAccount) VALUES(1, 'dev','dev','dev',1,1);
+INSERT INTO user_account(id_user_account, account_non_expired, account_non_locked,
+credentials_non_expired, enabled, id_user)
+VALUES(1, 1, 1, 1, 1, 1);
 
 INSERT INTO programming_language(id_programming_language, name) VALUES(1, 'Java');
 
@@ -58,7 +66,6 @@ INSERT INTO programming_language_keyword(id_programming_language_keyword, name) 
 INSERT INTO programming_language_keyword(id_programming_language_keyword, name) VALUES(48,'void');
 INSERT INTO programming_language_keyword(id_programming_language_keyword, name) VALUES(49,'volatile');
 INSERT INTO programming_language_keyword(id_programming_language_keyword, name) VALUES(50,'while');
-
 
 INSERT INTO programming_language_programming_language_keyword
     (id_programming_language, id_programming_language_keyword) VALUES(1,1);
