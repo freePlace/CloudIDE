@@ -21,7 +21,7 @@ public class ProgrammingLanguageKeyword extends AbstractModel{
     @Column(name = COLUMN_NAME, nullable = false)
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = ProgrammingLanguage.JOIN_TABLE_PROGRAMMING_LANGUAGE_KEYWORD_COLLECTION_NAME)
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = ProgrammingLanguage.JOIN_TABLE_PROGRAMMING_LANGUAGE_KEYWORD_COLLECTION_NAME)
     private List<ProgrammingLanguage> programmingLanguages;
 
     public int getId() {

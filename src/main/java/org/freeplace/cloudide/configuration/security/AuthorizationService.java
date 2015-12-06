@@ -54,8 +54,6 @@ public class AuthorizationService implements UserDetailsService {
             throw new EntityNotFoundException(e.getCause().getMessage());
         } catch (SQLException e) {
             throw new EntityNotFoundException(e.getCause().getMessage());
-        } finally {
-
         }
         /*
         UserAccount userAccount = user.getUserAccount();

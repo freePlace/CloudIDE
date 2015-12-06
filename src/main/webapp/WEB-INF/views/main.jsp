@@ -9,45 +9,35 @@
 <html>
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link href="resources/css/main.css" rel="stylesheet" />
     <title></title>
 </head>
 <body ng-app="main">
-<!-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
-<div ng-controller="MyController" >
-<button ng-click="myData.doClick(item, $event)">Send AJAX Request</button>
-Data from server: {{myData.fromServer}}
-<button ng-click="myData.click(item, $event)">Send data</button>
-<a href='logout'> LOGOUT</a>
+<div id="logout">
+    <form action="logout">
+        <input type="submit" value="Logout" />
+    </form>
 </div>
-<textarea rows="10" cols="45" name="text" id="executableCode">
-</textarea>
+<div ng-controller="executorController" >
+    <button ng-click="executor.execute(item, $event)">Execute</button>
+</div>
+<div id="editor">
+    public class X {
+        public static void main(String [] args) {
+            System.out.println("Hello world!");
+        }
+    }
+</div>
 <script>
-    angular.module("main", [])
-            .controller("MyController", function($scope, $http) {
-                $scope.myData = {};
-                $scope.myData.doClick = function(item, event) {
-
-                    var responsePromise = $http.get("/service/programmingLanguage");
-
-                    responsePromise.success(function(data, status, headers, config) {
-                        alert(data);
-                        $scope.myData.fromServer = data;
-                    });
-                    responsePromise.error(function(data, status, headers, config) {
-                        alert("AJAX failed!" + data + " " + status);
-                    });
-                }
-
-                $scope.myData.click = function(item, event) {
-                    var responsePromise = $http.post("/service/execute",document.getElementById("executableCode"));
-                    responsePromise.success(function(data, status, headers, config) {
-                        alert(data);
-                    });
-                    responsePromise.error(function(data, status, headers, config) {
-                        alert("AJAX failed!" + data + " " + status);
-                    });
-                }
-            } );
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/java");
+</script>
+<textarea rows="10" cols="180" id="executionResult" disabled >
+</textarea>
+<script src="/resources/js/main.js">
 </script>
 </body>
 </html>

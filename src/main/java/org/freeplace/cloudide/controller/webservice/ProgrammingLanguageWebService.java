@@ -1,7 +1,6 @@
 package org.freeplace.cloudide.controller.webservice;
 
 import org.freeplace.cloudide.applicationinfo.Path;
-import org.freeplace.cloudide.dao.ProgrammingLanguageDAOImpl;
 import org.freeplace.cloudide.model.ProgrammingLanguage;
 import org.freeplace.cloudide.service.ProgrammingLanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +24,12 @@ public class ProgrammingLanguageWebService extends AbstractWebService{
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity getLanguages() {
-        List<ProgrammingLanguage> languages = programmingLanguageService.findAll();
-        return new ResponseEntity<List<ProgrammingLanguage>>(languages, HttpStatus.OK);
+    public ResponseEntity getProgrammingLanguages() {
+        List<ProgrammingLanguage> programmingLanguages = programmingLanguageService.findAll();
+        return new ResponseEntity<List<ProgrammingLanguage>>(programmingLanguages, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     public ResponseEntity addLanguage(@RequestBody String language) {
          //
@@ -42,6 +40,6 @@ public class ProgrammingLanguageWebService extends AbstractWebService{
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public void deleteLanguage(@PathVariable("id") Long id) {
-       // coordinateRepository.delete(id);
+
     }
 }
