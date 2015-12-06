@@ -32,6 +32,10 @@ public class User extends AbstractModel{
     @JoinColumn(name = Role.COLUMN_ID, nullable = false)
     private Role role;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = UserAccount.COLUMN_ID, unique = true, nullable = false, updatable = false)
+    private UserAccount userAccount;
+
     public int getId() {
         return id;
     }
@@ -71,4 +75,13 @@ public class User extends AbstractModel{
     public void setRole(Role role) {
         this.role = role;
     }
+
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
+    }
+
 }

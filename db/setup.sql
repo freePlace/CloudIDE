@@ -1,7 +1,10 @@
 INSERT INTO role(id_role, name) VALUES(1,'ROLE_ADMIN');
 INSERT INTO role(id_role, name) VALUES(2,'ROLE_USER');
 
-INSERT INTO user(id_user, first_name, login, password, id_role) VALUES(1, 'dev','dev','dev',1);
+INSERT INTO useraccount(id_userAccount, accountNonExpired, accountNonLocked, credentialsNonExpired, enabled)
+VALUES(1, 1, 1, 1, 1);
+
+INSERT INTO user(id_user, first_name, login, password, id_role, id_userAccount) VALUES(1, 'dev','dev','dev',1,1);
 
 INSERT INTO programming_language(id_programming_language, name) VALUES(1, 'Java');
 
