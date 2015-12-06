@@ -2,12 +2,11 @@ package org.freeplace.cloudide.service;
 
 import com.google.common.io.CharStreams;
 import org.freeplace.cloudide.applicationinfo.ApplicationData;
-import org.freeplace.cloudide.applicationinfo.Path;
-import org.freeplace.cloudide.model.ExecutionModule;
+import org.freeplace.cloudide.controller.webservice.ProgrammingLanguageWebService;
+import org.freeplace.cloudide.controller.webservice.model.ExecutionModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 import java.io.*;
 

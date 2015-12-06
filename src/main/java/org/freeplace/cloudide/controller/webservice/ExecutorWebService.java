@@ -1,7 +1,7 @@
 package org.freeplace.cloudide.controller.webservice;
 
 import org.freeplace.cloudide.applicationinfo.Path;
-import org.freeplace.cloudide.model.ExecutionModule;
+import org.freeplace.cloudide.controller.webservice.model.ExecutionModule;
 import org.freeplace.cloudide.service.ExecutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

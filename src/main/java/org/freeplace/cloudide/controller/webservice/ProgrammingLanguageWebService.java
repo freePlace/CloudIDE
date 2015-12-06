@@ -1,7 +1,6 @@
 package org.freeplace.cloudide.controller.webservice;
 
 import org.freeplace.cloudide.applicationinfo.Path;
-import org.freeplace.cloudide.dao.ProgrammingLanguageDAOImpl;
 import org.freeplace.cloudide.model.ProgrammingLanguage;
 import org.freeplace.cloudide.service.ProgrammingLanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
