@@ -6,18 +6,12 @@ package com.freeplace.cloudide.dao;
 import org.dbunit.dataset.CompositeDataSet;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
-import org.freeplace.cloudide.dao.ProgrammingLanguageDAO;
-import org.freeplace.cloudide.dao.RoleDAO;
-import org.freeplace.cloudide.dao.UserDAO;
-import org.freeplace.cloudide.model.ProgrammingLanguage;
-import org.freeplace.cloudide.model.Role;
-import org.freeplace.cloudide.model.User;
+import org.freeplace.cloudide.dao.user.UserDAO;
+import org.freeplace.cloudide.model.user.Role;
+import org.freeplace.cloudide.model.user.User;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 public class UserDAOImplTest extends EntityDAOImplTest {
 
@@ -51,8 +45,8 @@ public class UserDAOImplTest extends EntityDAOImplTest {
 
     @Test
     public void findEmployeeBySsn() {
-        Assert.assertNotNull(userDAO.findUserByLogin("ADMIN"));
-        Assert.assertNull(userDAO.findUserByLogin("qwerty"));
+        Assert.assertNotNull(userDAO.findByColumnValue("ADMIN", User.COLUMN_LOGIN));
+        Assert.assertNull(userDAO.findByColumnValue("qwerty", User.COLUMN_LOGIN));
     }
 
     public User getSampleUser() {

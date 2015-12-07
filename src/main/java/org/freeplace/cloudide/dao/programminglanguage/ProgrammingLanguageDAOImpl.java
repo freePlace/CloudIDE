@@ -1,6 +1,7 @@
-package org.freeplace.cloudide.dao;
+package org.freeplace.cloudide.dao.programminglanguage;
 
-import org.freeplace.cloudide.model.ProgrammingLanguage;
+import org.freeplace.cloudide.dao.AbstractDAO;
+import org.freeplace.cloudide.model.programminglanguage.ProgrammingLanguage;
 import org.springframework.stereotype.Repository;
 
 /**

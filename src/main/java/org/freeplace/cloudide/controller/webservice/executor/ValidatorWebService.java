@@ -1,8 +1,9 @@
-package org.freeplace.cloudide.controller.webservice;
+package org.freeplace.cloudide.controller.webservice.executor;
 
 import org.freeplace.cloudide.applicationinfo.Path;
+import org.freeplace.cloudide.controller.webservice.AbstractWebService;
 import org.freeplace.cloudide.controller.webservice.model.ValidationModule;
-import org.freeplace.cloudide.service.ValidatorService;
+import org.freeplace.cloudide.service.executor.ValidatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

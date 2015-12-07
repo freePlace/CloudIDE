@@ -1,4 +1,4 @@
-package org.freeplace.cloudide.service;
+package org.freeplace.cloudide.service.executor;
 
 import org.freeplace.cloudide.controller.webservice.model.ValidationModule;
 import org.springframework.beans.factory.annotation.Autowired;

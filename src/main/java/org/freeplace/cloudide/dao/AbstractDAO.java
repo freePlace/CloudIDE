@@ -2,10 +2,13 @@ package org.freeplace.cloudide.dao;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.freeplace.cloudide.applicationinfo.ApplicationData;
+import org.freeplace.cloudide.model.Project;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import java.lang.reflect.ParameterizedType;
+
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Repository;
@@ -48,11 +51,19 @@ public class AbstractDAO<T, PK extends Serializable> {
     }
 
     public List<T> findAll() {
-        try {
-            return (List<T>) createEntityCriteria().list();
-        } catch(Exception e) {
-            throw new NullPointerException(e + " ");
-        }
+        return (List<T>) createEntityCriteria().list();
+    }
+
+    public List<T> findByColumnValue(Object value, String columnName) {
+        Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.eq(columnName, value));
+        return (List<T>) criteria.list();
+    }
+
+    public T findByUniqueColumnValue(Object value, String columnName) {
+        Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.eq(columnName, value));
+        return (T) criteria.uniqueResult();
     }
 
     protected Criteria createEntityCriteria() {

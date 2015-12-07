@@ -1,4 +1,6 @@
-package org.freeplace.cloudide.model;
+package org.freeplace.cloudide.model.user;
+
+import org.freeplace.cloudide.model.AbstractModel;
 
 import javax.persistence.*;
 import java.util.List;
@@ -8,14 +10,14 @@ import java.util.List;
  */
 @Entity
 @Table(name = Role.TABLE_NAME)
-public class Role extends AbstractModel{
+public class Role extends AbstractModel {
     public static final String TABLE_NAME = "role";
+    public static final String TABLE_ID = "id_role";
     public static final String COLUMN_NAME = "name";
-    public static final String COLUMN_ID = "id_role";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = COLUMN_ID)
+    @Column(name = TABLE_ID)
     private int id;
 
     @Column(name = COLUMN_NAME, nullable = false)
@@ -23,14 +25,6 @@ public class Role extends AbstractModel{
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = TABLE_NAME)
     private List<User> users;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

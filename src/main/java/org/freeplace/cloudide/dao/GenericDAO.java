@@ -12,4 +12,6 @@ public interface GenericDAO<T, PK extends Serializable> {
     void update(T entity);
     void delete(T entity);
     List<T> findAll();
+    List<T> findByColumnValue(Object value, String columnName);
+    T findByUniqueColumnValue(Object value, String columnName);
 }

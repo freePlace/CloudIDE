@@ -1,13 +1,10 @@
 package org.freeplace.cloudide.service;
 
-import org.freeplace.cloudide.model.ProgrammingLanguageKeyword;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 

@@ -1,4 +1,6 @@
-package org.freeplace.cloudide.model;
+package org.freeplace.cloudide.model.user;
+
+import org.freeplace.cloudide.model.AbstractModel;
 
 import javax.persistence.*;
 
@@ -8,10 +10,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = UserAccount.TABLE_NAME)
-public class UserAccount extends AbstractModel{
+public class UserAccount extends AbstractModel {
 
     public static final String TABLE_NAME = "user_account";
-    public static final String COLUMN_ID = "id_user_account";
+    public static final String TABLE_ID = "id_user_account";
     public static final String COLUMN_ENABLED = "enabled";
     public static final String COLUMN_ACCOUNT_NON_EXPIRED = "account_non_expired";
     public static final String COLUMN_CREDENTIALS_NON_EXPIRED = "credentials_non_expired";
@@ -19,7 +21,7 @@ public class UserAccount extends AbstractModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = COLUMN_ID)
+    @Column(name = TABLE_ID)
     private int id;
 
     @Column(name = COLUMN_ENABLED)
@@ -35,16 +37,8 @@ public class UserAccount extends AbstractModel{
     private boolean accountNonLocked;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = User.COLUMN_ID, unique = true, nullable = false)
+    @JoinColumn(name = User.TABLE_ID, unique = true, nullable = false)
     private User user;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public boolean isEnabled() {
         return enabled;

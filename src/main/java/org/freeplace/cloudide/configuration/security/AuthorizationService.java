@@ -1,8 +1,8 @@
 package org.freeplace.cloudide.configuration.security;
 
-import org.freeplace.cloudide.model.Role;
-import org.freeplace.cloudide.model.User;
-import org.freeplace.cloudide.model.UserAccount;
+import org.freeplace.cloudide.model.user.Role;
+import org.freeplace.cloudide.model.user.User;
+import org.freeplace.cloudide.model.user.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

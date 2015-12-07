@@ -1,3 +1,4 @@
+DELETE FROM project;
 DELETE FROM user_account;
 DELETE FROM user;
 DELETE FROM role;
@@ -167,3 +168,4 @@ INSERT INTO programming_language_programming_language_keyword
     (id_programming_language, id_programming_language_keyword) VALUES(1,49);
 INSERT INTO programming_language_programming_language_keyword
     (id_programming_language, id_programming_language_keyword) VALUES(1,50);
+    

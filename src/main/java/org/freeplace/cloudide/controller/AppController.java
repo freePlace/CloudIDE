@@ -1,11 +1,9 @@
 package org.freeplace.cloudide.controller;
 
-import org.freeplace.cloudide.applicationinfo.ApplicationData;
-import org.freeplace.cloudide.applicationinfo.FileExtension;
 import org.freeplace.cloudide.applicationinfo.Path;
-import org.freeplace.cloudide.dao.UserDAOImpl;
-import org.freeplace.cloudide.model.User;
-import org.freeplace.cloudide.service.UserService;
+import org.freeplace.cloudide.model.user.User;
+import org.freeplace.cloudide.model.user.UserAccount;
+import org.freeplace.cloudide.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,9 +13,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.management.relation.Role;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -32,7 +30,9 @@ public class AppController {
 
     @RequestMapping(value = Path.SLASH, method = RequestMethod.GET)
     public String getWelcomePage(ModelMap model) {
-        model.addAttribute(Attribute.USERS, userService.findAll());
+        //example how we can lazy init objects
+        //List<User> users = userService.findAll(Role.class, UserAccount.class);
+        //model.addAttribute(Attribute.USERS, users);
         return Path.REDIRECT + Page.MAIN;
     }
 

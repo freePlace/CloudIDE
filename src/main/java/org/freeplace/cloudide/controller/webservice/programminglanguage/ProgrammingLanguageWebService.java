@@ -1,8 +1,9 @@
-package org.freeplace.cloudide.controller.webservice;
+package org.freeplace.cloudide.controller.webservice.programminglanguage;
 
 import org.freeplace.cloudide.applicationinfo.Path;
-import org.freeplace.cloudide.model.ProgrammingLanguage;
-import org.freeplace.cloudide.service.ProgrammingLanguageService;
+import org.freeplace.cloudide.controller.webservice.AbstractWebService;
+import org.freeplace.cloudide.model.programminglanguage.ProgrammingLanguage;
+import org.freeplace.cloudide.service.programminglanguage.ProgrammingLanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(ProgrammingLanguageWebService.SERVICE_PATH)
-public class ProgrammingLanguageWebService extends AbstractWebService{
+public class ProgrammingLanguageWebService extends AbstractWebService {
 
     public static final String SERVICE_PATH = BASE_PATH + Path.SLASH + "programmingLanguage";
 
