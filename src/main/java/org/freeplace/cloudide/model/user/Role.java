@@ -15,7 +15,7 @@ public class Role extends AbstractModel {
     public static final String TABLE_ID = "id_role";
     public static final String COLUMN_NAME = "name";
 
-    @Id
+   @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = TABLE_ID)
     private int id;
@@ -41,4 +41,5 @@ public class Role extends AbstractModel {
     public void setUsers(List<User> users) {
         this.users = users;
     }
+
 }

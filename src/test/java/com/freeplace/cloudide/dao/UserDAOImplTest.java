@@ -45,8 +45,8 @@ public class UserDAOImplTest extends EntityDAOImplTest {
 
     @Test
     public void findEmployeeBySsn() {
-        Assert.assertNotNull(userDAO.findByColumnValue("ADMIN", User.COLUMN_LOGIN));
-        Assert.assertNull(userDAO.findByColumnValue("qwerty", User.COLUMN_LOGIN));
+        Assert.assertTrue(userDAO.findByColumnValue("ADMIN", User.COLUMN_LOGIN).size() == 1);
+        Assert.assertTrue(userDAO.findByColumnValue("qwerty", User.COLUMN_LOGIN).size() == 0);
     }
 
     public User getSampleUser() {

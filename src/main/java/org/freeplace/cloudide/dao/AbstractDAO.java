@@ -55,15 +55,11 @@ public class AbstractDAO<T, PK extends Serializable> {
     }
 
     public List<T> findByColumnValue(Object value, String columnName) {
-        Criteria criteria = createEntityCriteria();
-        criteria.add(Restrictions.eq(columnName, value));
-        return (List<T>) criteria.list();
+        return (List<T>) createEntityCriteria().add(Restrictions.eq(columnName, value)).list();
     }
 
     public T findByUniqueColumnValue(Object value, String columnName) {
-        Criteria criteria = createEntityCriteria();
-        criteria.add(Restrictions.eq(columnName, value));
-        return (T) criteria.uniqueResult();
+        return (T) createEntityCriteria().add(Restrictions.eq(columnName, value)).uniqueResult();
     }
 
     protected Criteria createEntityCriteria() {

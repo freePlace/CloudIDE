@@ -19,13 +19,10 @@ import java.lang.reflect.Modifier;
 public abstract class AbstractModel {
 
     public static final String PREFIX_FOR_INITIALIZABLE_TYPES = "get";
-    private static final String DEFAULT_TABLE_ID = "id";
+    //private static final String DEFAULT_TABLE_ID = "id";
     private static final String FIELD_ID = "id";
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = DEFAULT_TABLE_ID)
-    private int id;
+
 
     // todo: fix circle links for this solution
     @Override
@@ -37,7 +34,7 @@ public abstract class AbstractModel {
 
     public int getId() {
         try {
-            return (int) this.getClass().getField(FIELD_ID).get(this);
+            return (int) this.getClass().getDeclaredField(FIELD_ID).get(this);
         } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
             throw new IllegalAccessError();
         }
@@ -45,11 +42,11 @@ public abstract class AbstractModel {
 
     public void setId(int id) {
         try {
-            Field idField = this.getClass().getField(FIELD_ID);
+            Field idField = this.getClass().getDeclaredField(FIELD_ID);
             idField.setAccessible(true);
             idField.set(this, id);
         } catch (SecurityException | NoSuchFieldException | IllegalArgumentException | IllegalAccessException e) {
-            throw new IllegalAccessError();
+            throw new IllegalAccessError(e + "");
         }
     }
 }
