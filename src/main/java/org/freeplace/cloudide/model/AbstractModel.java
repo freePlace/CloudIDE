@@ -5,6 +5,7 @@ import com.google.common.base.Objects;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public abstract class AbstractModel {
 
     // todo: fix circle links for this solution
     @Override
-    public String toString() { return ReflectionToStringBuilder.toString(this); }
+    public String toString() { return ToStringBuilder.reflectionToString(this, new CustomToStringStyle()); }
     @Override
     public boolean equals(Object o) { return EqualsBuilder.reflectionEquals(this, o); }
     @Override
@@ -34,7 +35,9 @@ public abstract class AbstractModel {
 
     public int getId() {
         try {
-            return (int) this.getClass().getDeclaredField(FIELD_ID).get(this);
+            Field idField = this.getClass().getDeclaredField(FIELD_ID);
+            idField.setAccessible(true);
+            return (int) idField.get(this);
         } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
             throw new IllegalAccessError();
         }
