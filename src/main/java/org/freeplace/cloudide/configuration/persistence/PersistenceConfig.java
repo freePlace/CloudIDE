@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import org.freeplace.cloudide.applicationinfo.ApplicationData;
 import org.freeplace.cloudide.applicationinfo.Path;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.ImprovedNamingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,7 +24,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({ ApplicationData.PACKAGE_CONFIGURATION })
+@ComponentScan(ApplicationData.APPLICATION_FULL_NAME)
 @PropertySource(value = { Path.CLASSPATH + ":application.properties" })
 public class PersistenceConfig {
 
@@ -44,8 +45,9 @@ public class PersistenceConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[] { ApplicationData.PACKAGE_MODEL });
+        sessionFactory.setPackagesToScan(new String[]{ApplicationData.PACKAGE_MODEL});
         sessionFactory.setHibernateProperties(getProperties());
+        sessionFactory.setNamingStrategy(new ImprovedNamingStrategy());
         return sessionFactory;
     }
 

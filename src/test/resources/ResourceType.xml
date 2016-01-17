@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <resource_type id_resource_type="1" name="jsp" icon_path="c:\\Program Files\fake.jpeg"/>
+    <resource_type id_resource_type="2" name="java" icon_path="c:\\Program Files\fake2.jpeg"/>
+</dataset>

@@ -1,10 +1,14 @@
 package org.freeplace.cloudide.dao.user;
 
-import org.freeplace.cloudide.dao.GenericDAO;
+import org.freeplace.cloudide.dao.AbstractDAO;
 import org.freeplace.cloudide.model.user.User;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by Ruslan on 02.12.2015.
  */
-public interface UserDAO  extends GenericDAO<User,Integer> {
+@Repository
+public class UserDAO extends AbstractDAO<User, Integer> {
 }

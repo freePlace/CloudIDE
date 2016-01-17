@@ -1,43 +1,29 @@
 package org.freeplace.cloudide.model.user;
 
-import org.freeplace.cloudide.model.AbstractModel;
+import org.freeplace.cloudide.model.AbstractEntity;
 
 import javax.persistence.*;
 
-/**
- * Created by c3po on 12/5/2015.
- */
-
 @Entity
-@Table(name = UserAccount.TABLE_NAME)
-public class UserAccount extends AbstractModel {
+public class UserAccount extends AbstractEntity {
 
-    public static final String TABLE_NAME = "user_account";
     public static final String TABLE_ID = "id_user_account";
-    public static final String COLUMN_ENABLED = "enabled";
-    public static final String COLUMN_ACCOUNT_NON_EXPIRED = "account_non_expired";
-    public static final String COLUMN_CREDENTIALS_NON_EXPIRED = "credentials_non_expired";
-    public static final String COLUMN_ACCOUNT_NON_LOCKED = "account_non_locked";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = TABLE_ID)
     private int id;
 
-    @Column(name = COLUMN_ENABLED)
     private boolean enabled;
 
-    @Column(name = COLUMN_ACCOUNT_NON_EXPIRED)
     private boolean accountNonExpired;
 
-    @Column(name = COLUMN_CREDENTIALS_NON_EXPIRED)
     private boolean credentialsNonExpired;
 
-    @Column(name = COLUMN_ACCOUNT_NON_LOCKED)
     private boolean accountNonLocked;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = User.TABLE_ID, unique = true, nullable = false)
+    @OneToOne
+    @JoinColumn(name = User.TABLE_ID)
     private User user;
 
     public boolean isEnabled() {
@@ -78,5 +64,13 @@ public class UserAccount extends AbstractModel {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

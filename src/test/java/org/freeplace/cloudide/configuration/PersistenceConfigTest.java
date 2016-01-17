@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 
 import org.freeplace.cloudide.applicationinfo.ApplicationData;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.ImprovedNamingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -31,12 +32,13 @@ public class PersistenceConfigTest {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[] { ApplicationData.PACKAGE_MODEL });
+        sessionFactory.setPackagesToScan(new String[]{ApplicationData.PACKAGE_MODEL});
         sessionFactory.setHibernateProperties(getProperties());
+        sessionFactory.setNamingStrategy(new ImprovedNamingStrategy());
         return sessionFactory;
     }
 
-    @Bean(name = "dataSource")
+    @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");

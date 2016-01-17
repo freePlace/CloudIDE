@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <resource id_resource="1" path="c:\\Program Files" id_root_resource="1" id_resource_type="1" />
+    <resource id_resource="2" path="c:\\Program Files\fake.txt" id_root_resource="1" id_resource_type="2" />
+</dataset>

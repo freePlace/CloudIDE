@@ -1,3 +1,4 @@
+USE cloud_ide;
 DELETE FROM project;
 DELETE FROM user_account;
 DELETE FROM user;
@@ -5,6 +6,11 @@ DELETE FROM role;
 DELETE FROM programming_language_programming_language_keyword;
 DELETE FROM programming_language_keyword;
 DELETE FROM programming_language;
+DELETE FROM logging_event;
+DELETE FROM logging_type;
+
+INSERT INTO logging_type VALUES(1,'ERROR');
+INSERT INTO logging_type VALUES(2,'DEBUG');
 
 INSERT INTO role(id_role, name) VALUES(1,'ROLE_ADMIN');
 INSERT INTO role(id_role, name) VALUES(2,'ROLE_USER');

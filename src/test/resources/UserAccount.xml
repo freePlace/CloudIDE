@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <user_account id_user_account="1" enabled="1" account_non_expired="true" credentials_non_expired="true" account_non_locked ="true" />
+    <user_account id_user_account="2" enabled="0" account_non_expired="false" credentials_non_expired="false" account_non_locked ="false" />
+</dataset>

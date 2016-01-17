@@ -16,6 +16,7 @@ public class ApplicationData {
     public static final String PACKAGE_DAO = APPLICATION_FULL_NAME + DOT + "dao";
     public static final String PACKAGE_MODEL = APPLICATION_FULL_NAME + DOT + "model";
     public static final String PACKAGE_SERVICE = APPLICATION_FULL_NAME + DOT + "service";
+    public static final String PACKAGE_LOGGING = PACKAGE_SERVICE + DOT + "logging";
 
     public static final String EXEC_COMMAND = System.getProperty("java.home").toString()+"/bin/java -classpath";
 }

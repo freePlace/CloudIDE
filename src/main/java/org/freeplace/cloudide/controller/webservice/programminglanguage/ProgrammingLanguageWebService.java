@@ -3,7 +3,6 @@ package org.freeplace.cloudide.controller.webservice.programminglanguage;
 import org.freeplace.cloudide.applicationinfo.Path;
 import org.freeplace.cloudide.controller.webservice.AbstractWebService;
 import org.freeplace.cloudide.model.programminglanguage.ProgrammingLanguage;
-import org.freeplace.cloudide.service.programminglanguage.ProgrammingLanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +19,11 @@ public class ProgrammingLanguageWebService extends AbstractWebService {
 
     public static final String SERVICE_PATH = BASE_PATH + Path.SLASH + "programmingLanguage";
 
-    @Autowired
-    private ProgrammingLanguageService programmingLanguageService;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity getProgrammingLanguages() {
-        List<ProgrammingLanguage> programmingLanguages = programmingLanguageService.findAll();
+        List<ProgrammingLanguage> programmingLanguages = null;//programmingLanguageService.findAll();
         return new ResponseEntity<List<ProgrammingLanguage>>(programmingLanguages, HttpStatus.OK);
     }
 
