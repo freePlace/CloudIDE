@@ -44,9 +44,9 @@ public class ResourceTypeDAOTest extends AbstractDAOTest {
         Assert.assertNull(resourceTypeDAO.findById(3));
         resourceTypeDAO.create(resourceType);
         Assert.assertEquals(3, resourceTypeDAO.findAll().size());
-        Assert.assertNotNull(resourceTypeDAO.findOneByColumnValue(iconPath, "iconPath"));
-        Assert.assertEquals(iconPath, resourceTypeDAO.findOneByColumnValue(iconPath, "iconPath").getIconPath());
-        Assert.assertEquals(name, resourceTypeDAO.findOneByColumnValue(iconPath, "iconPath").getName());
+        Assert.assertNotNull(resourceTypeDAO.findOneByColumnValue("iconPath", iconPath));
+        Assert.assertEquals(iconPath, resourceTypeDAO.findOneByColumnValue("iconPath", iconPath).getIconPath());
+        Assert.assertEquals(name, resourceTypeDAO.findOneByColumnValue("iconPath", iconPath).getName());
     }
 
     @Override

@@ -54,7 +54,7 @@ public class UserService {
     public void createUser(User user) {
         if(!validateUser(user)) throw new RuntimeException("Validation failed");
 
-        user.setRole(roleDAO.findOneByColumnValue(Roles.ROLE_USER.name(), "name"));
+        user.setRole(roleDAO.findOneByColumnValue("name", Roles.ROLE_USER.name()));
         userDAO.create(user);
     }
 

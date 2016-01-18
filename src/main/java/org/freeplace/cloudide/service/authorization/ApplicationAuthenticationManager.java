@@ -25,7 +25,7 @@ public class ApplicationAuthenticationManager implements AuthenticationManager {
 
     public Authentication authenticate(Authentication auth) throws AuthenticationException {
         String login = auth.getName();
-        User user = userDAO.findOneByColumnValue(login, "login");
+        User user = userDAO.findOneByColumnValue("login", login);
         if(user != null && user.getPassword().equals(auth.getCredentials())) {
             List<GrantedAuthority> authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority(user.getRole().getName()));

@@ -38,10 +38,10 @@ public class ProgrammingLanguageKeywordDAOTest extends AbstractDAOTest {
         ProgrammingLanguageKeyword programmingLanguageKeyword = new ProgrammingLanguageKeyword();
         String testName = "double";
         programmingLanguageKeyword.setName(testName);
-        Assert.assertNull(programmingLanguageKeywordDAO.findOneByColumnValue(testName, "name"));
+        Assert.assertNull(programmingLanguageKeywordDAO.findOneByColumnValue("name", testName));
         programmingLanguageKeywordDAO.create(programmingLanguageKeyword);
         Assert.assertEquals(3, programmingLanguageKeywordDAO.findAll().size());
-        Assert.assertNotNull(programmingLanguageKeywordDAO.findOneByColumnValue(testName, "name"));
+        Assert.assertNotNull(programmingLanguageKeywordDAO.findOneByColumnValue("name", testName));
     }
 
     @Override

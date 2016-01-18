@@ -8,6 +8,17 @@ DELETE FROM programming_language_keyword;
 DELETE FROM programming_language;
 DELETE FROM logging_event;
 DELETE FROM logging_type;
+DELETE FROM navigation_project;
+DELETE FROM navigation_execute;
+DELETE FROM navigation_panel;
+
+INSERT INTO navigation_panel VALUES(1,'main');
+
+INSERT INTO navigation_project VALUES(1,'New', 1);
+INSERT INTO navigation_project VALUES(2,'Open', 1);
+
+INSERT INTO navigation_execute VALUES(1,'Run', 1);
+INSERT INTO navigation_execute VALUES(2,'Debug', 1);
 
 INSERT INTO logging_type VALUES(1,'ERROR');
 INSERT INTO logging_type VALUES(2,'DEBUG');

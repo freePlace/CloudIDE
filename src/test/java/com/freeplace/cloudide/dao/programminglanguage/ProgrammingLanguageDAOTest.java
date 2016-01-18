@@ -38,10 +38,10 @@ public class ProgrammingLanguageDAOTest extends AbstractDAOTest {
         ProgrammingLanguage programmingLanguage = new ProgrammingLanguage();
         String testName = "scala";
         programmingLanguage.setName(testName);
-        Assert.assertNull(programmingLanguageDAO.findOneByColumnValue(testName, "name"));
+        Assert.assertNull(programmingLanguageDAO.findOneByColumnValue("name",testName));
         programmingLanguageDAO.create(programmingLanguage);
         Assert.assertEquals(3, programmingLanguageDAO.findAll().size());
-        Assert.assertNotNull(programmingLanguageDAO.findOneByColumnValue(testName, "name"));
+        Assert.assertNotNull(programmingLanguageDAO.findOneByColumnValue("name",testName));
     }
 
     @Override

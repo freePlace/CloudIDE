@@ -38,12 +38,12 @@ public class LoggingAspect {
         try {
             Object result = proceedingJoinPoint.proceed();
             loggingEvent.setResult(result == null ? "Empty value" : result.toString());
-            loggingEvent.setLoggingType(loggingTypeDAO.findOneByColumnValue("DEBUG", "name"));
+            loggingEvent.setLoggingType(loggingTypeDAO.findOneByColumnValue("name", "DEBUG"));
             loggingEventDAO.create(loggingEvent);
             return result;
         } catch (Throwable e) {
             loggingEvent.setResult(e.toString());
-            loggingEvent.setLoggingType(loggingTypeDAO.findOneByColumnValue("ERROR", "name"));
+            loggingEvent.setLoggingType(loggingTypeDAO.findOneByColumnValue("name", "ERROR"));
             loggingEventDAO.create(loggingEvent);
             throw new RuntimeException(e.getMessage());
         }

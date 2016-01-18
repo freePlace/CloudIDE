@@ -38,10 +38,10 @@ public class RoleDAOTest extends AbstractDAOTest {
         Role role = new Role();
         String testName = "ROLE_TEST";
         role.setName(testName);
-        Assert.assertNull(roleDAO.findOneByColumnValue(testName, "name"));
+        Assert.assertNull(roleDAO.findOneByColumnValue("name", testName));
         roleDAO.create(role);
         Assert.assertEquals(3, roleDAO.findAll().size());
-        Assert.assertNotNull(roleDAO.findOneByColumnValue(testName, "name"));
+        Assert.assertNotNull(roleDAO.findOneByColumnValue("name", testName));
     }
 
     @Override
