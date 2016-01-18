@@ -13,7 +13,7 @@
         <input type="submit" value="Logout" />
     </form>
 </div>
-<div ng-controller="executorController" >
+<div ng-controller="executorController">
     <button ng-click="executor.execute(item, $event)">Execute</button>
 </div>
 <div id="editor">

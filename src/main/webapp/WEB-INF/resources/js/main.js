@@ -30,3 +30,27 @@ mainModule.controller("executorController", function($scope, $http) {
         });
     }
 });
+
+mainModule.controller("userController", function($scope, $http) {
+    $scope.user = {};
+    $scope.user.toggle = function(item, event){
+        $("#createUserForm").toggle();
+    };
+    $scope.user.create = function(item, event) {
+        var requestData =
+        {
+            "email": $("#newEmail").val(),
+            "login": $("#newLogin").val(),
+            "password": $("#newPassword").val(),
+            "firstName": $("#newFirstName").val(),
+            "lastName": $("#newLastName").val()
+        };
+        var responsePromise = $http.post("/service/user",requestData);
+        responsePromise.success(function(data, status, headers, config) {
+            alert(data);
+        });
+        responsePromise.error(function(data, status, headers, config) {
+            alert("AJAX failed!" + data + " " + status + " " + headers);
+        });
+    }
+});

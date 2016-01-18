@@ -1,11 +1,14 @@
 package org.freeplace.cloudide.controller;
 
 import org.freeplace.cloudide.applicationinfo.Path;
+import org.freeplace.cloudide.dao.user.RoleDAO;
 import org.freeplace.cloudide.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

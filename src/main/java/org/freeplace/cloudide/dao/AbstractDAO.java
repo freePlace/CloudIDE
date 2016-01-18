@@ -55,7 +55,9 @@ public class AbstractDAO<T extends AbstractEntity, PK extends Serializable> {
     }
 
     public T findOneByColumnValue(Object value, String columnName) {
-        return (T) createEntityCriteria().add(Restrictions.eq(columnName, value)).uniqueResult();
+        List result = createEntityCriteria().add(Restrictions.eq(columnName, value)).list();
+        if(!result.isEmpty()) return (T)result.get(0);
+        else return null;
     }
 
     protected Criteria createEntityCriteria() {

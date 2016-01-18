@@ -31,6 +31,8 @@ public class ApplicationAuthenticationManager implements AuthenticationManager {
             authorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
             return new UsernamePasswordAuthenticationToken(auth.getName(), auth.getCredentials(), authorities);
         }
-        throw new BadCredentialsException("Couldn't authorize");
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(auth.getName(), auth.getCredentials(), null);
+        authentication.setAuthenticated(false);
+        return authentication;
     }
 }

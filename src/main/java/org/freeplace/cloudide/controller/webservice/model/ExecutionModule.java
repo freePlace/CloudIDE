@@ -3,9 +3,6 @@ package org.freeplace.cloudide.controller.webservice.model;
 /**
  * Created by Ruslan on 06.12.2015.
  */
-/**
- * Created by Ruslan on 06.12.2015.
- */
 public class ExecutionModule {
     private String executableCode;
     private String language;

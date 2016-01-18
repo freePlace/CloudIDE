@@ -1,3 +1,5 @@
+import groovy.sql.Sql
+
 group 'com.freeplace'
 version '1.0-SNAPSHOT'
 
@@ -23,6 +25,8 @@ repositories {
     mavenCentral()
 }
 
+def mySqlConnectorVersion = '5.1.31'
+
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
 
@@ -40,7 +44,6 @@ dependencies {
     compile "javax.servlet:jstl:1.2"
 
     //jdbc
-    def mySqlConnectorVersion = '5.1.31'
     compile "mysql:mysql-connector-java:${mySqlConnectorVersion}"
 
     // hibernate
@@ -97,15 +100,44 @@ dependencies {
 tomcatRun.contextPath = '/'
 tomcatRunWar.contextPath = '/'
 
+configurations { driver }
+
+dependencies {
+    driver "mysql:mysql-connector-java:${mySqlConnectorVersion}"
+}
+
+URLClassLoader loader = GroovyObject.class.classLoader
+configurations.driver.each {File file -> loader.addURL(file.toURL())}
+
+task setupData << {
+    Properties props = new Properties()
+    props.load(new FileInputStream("src/main/resources/application.properties"))
+    def credentialProperties = [user: props.getProperty("jdbc.username"),
+                                password: props.getProperty("jdbc.password")] as Properties
+    def sql = Sql.newInstance(props.getProperty("jdbc.url"),
+            credentialProperties,
+            props.getProperty("jdbc.driverClassName"))
+    String [] sqlStrings = new File('db/setup.sql').text.tokenize(';')
+    sqlStrings.eachWithIndex { query, index -> sql.execute("${query};".replaceAll("''","'"))}
+    sql.close()
+}
+
+gradle.projectsEvaluated {
+    test.dependsOn(setupData)
+}
+
 task full(dependsOn: [test, tomcatRunWar]) << {
     println 'Done'
 }
 //add static code analysis tool
 //create auto dao generation task
-// create auto db population script
 //separate web services in new module
 // use constructor injection!
 //add logging with aspects
 //create ONE datasource
 // create normal authorization service(using hibernate)
+// create validation layer
+//add facebook authorization
+//resolve tomcat exception
+// password encoding
 

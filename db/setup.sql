@@ -15,7 +15,7 @@ INSERT INTO logging_type VALUES(2,'DEBUG');
 INSERT INTO role(id_role, name) VALUES(1,'ROLE_ADMIN');
 INSERT INTO role(id_role, name) VALUES(2,'ROLE_USER');
 
-INSERT INTO user(id_user, first_name, login, password, id_role) VALUES(1, 'dev','dev','dev',1);
+INSERT INTO user(id_user, first_name, last_name, email, login, password, id_role) VALUES(1, 'dev','dev','dev','dev','dev',1);
 
 INSERT INTO user_account(id_user_account, account_non_expired, account_non_locked,
 credentials_non_expired, enabled, id_user)
@@ -174,4 +174,3 @@ INSERT INTO programming_language_programming_language_keyword
     (id_programming_language, id_programming_language_keyword) VALUES(1,49);
 INSERT INTO programming_language_programming_language_keyword
     (id_programming_language, id_programming_language_keyword) VALUES(1,50);
-    
