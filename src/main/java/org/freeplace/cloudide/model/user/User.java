@@ -2,6 +2,8 @@ package org.freeplace.cloudide.model.user;
 
 import org.freeplace.cloudide.model.AbstractEntity;
 import org.freeplace.cloudide.model.user.workspace.Workspace;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,17 +24,20 @@ public class User extends AbstractEntity {
 
     private String lastName;
 
+    @Email
     private String email;
 
+    @Length(min = 2, max = 15)
     private String login;
 
+    @Length(min = 2, max = 15)
     private String password;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = Role.TABLE_ID)
     private Role role;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne
     private UserAccount userAccount;
 
     @OneToMany(mappedBy = "user")

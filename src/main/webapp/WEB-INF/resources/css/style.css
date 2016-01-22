@@ -1,0 +1,52 @@
+/*main nav*/
+.dop_nav, 
+.broadcamp,
+.main_nav {
+	background: linear-gradient(0deg, #7998BA, #9AB2CB);
+	padding: 5px 10px;
+	box-shadow: 0 0 10px #000;
+}
+.dop_nav li,
+.main_nav li {
+	display: block;
+	float: left;
+	margin-right: 15px;
+}
+.nav_line {
+	height: 23px;
+	width: 1px;
+	background-color: #000;
+}
+/*second nav*/
+#working_space,
+.broadcamp,
+.dop_nav {margin-top: 2px;}
+
+/*broadcamp*/
+.block_title input,
+.broadcamp input {
+	background-color: transparent;
+	border: none;
+	border-radius: 3px;
+	box-shadow: 0 0 3px #ccc;
+}
+
+/*working_space*/
+#working_space {
+	width: 100%;
+}
+.project,
+.code {
+	background-color: #CCCCCC;
+	display: inline-block;
+	box-shadow: 0 0 10px #000;
+	height: 500px;
+}
+.project {
+	width: 30%;
+}
+.code {width: 69.7%;}
+/*title block*/
+.block_title {
+	background: linear-gradient(0deg, #B3A080, #D9CFBF);;
+}

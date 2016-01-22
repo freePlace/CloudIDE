@@ -47,7 +47,7 @@ public class AppController {
     public String doLogin(HttpServletRequest request) {
         userService.authorize(request.getParameter("login"), request.getParameter("password"));
         return Path.REDIRECT + Page.MAIN;
-    }
+}
 
     @RequestMapping(value = Path.SLASH + Page.DO_LOGIN, method = RequestMethod.GET)
     public String doLoginGet() {

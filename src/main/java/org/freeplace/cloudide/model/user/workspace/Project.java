@@ -2,6 +2,7 @@ package org.freeplace.cloudide.model.user.workspace;
 
 import org.freeplace.cloudide.model.AbstractEntity;
 import org.freeplace.cloudide.model.programminglanguage.ProgrammingLanguage;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 
@@ -18,6 +19,7 @@ public class Project extends AbstractEntity {
     @Column(name = TABLE_ID)
     private int id;
 
+    @NotEmpty
     private String name;
 
     @ManyToOne

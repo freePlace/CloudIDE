@@ -31,7 +31,7 @@ dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
 
     //tomcat
-    def tomcatVersion = '7.0.57'
+    def tomcatVersion = '7.0.67'
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
     "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
     tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
@@ -49,6 +49,12 @@ dependencies {
     // hibernate
     def hibernateVersion = '4.3.6.Final'
     compile "org.hibernate:hibernate-core:${hibernateVersion}"
+
+    // validation api
+    def hibernateValidatorVersion = '5.2.2.Final'
+    compile "org.hibernate:hibernate-validator:${hibernateValidatorVersion}"
+    compile "org.hibernate:hibernate-validator-annotation-processor:${hibernateValidatorVersion}"
+    compile "javax.el:javax.el-api:2.2.4"
 
     // spring
     def springVersion = '4.2.2.RELEASE'
@@ -129,6 +135,8 @@ gradle.projectsEvaluated {
 task full(dependsOn: [test, tomcatRunWar]) << {
     println 'Done'
 }
+// configure second level cache
+// add mock testing for service layer
 //add static code analysis tool
 //create auto dao generation task
 //separate web services in new module
@@ -138,6 +146,5 @@ task full(dependsOn: [test, tomcatRunWar]) << {
 // create normal authorization service(using hibernate)
 // create validation layer
 //add facebook authorization
-//resolve tomcat exception
 // password encoding
 

@@ -1,6 +1,7 @@
 package org.freeplace.cloudide.model.user;
 
 import org.freeplace.cloudide.model.AbstractEntity;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,6 +18,7 @@ public class Role extends AbstractEntity {
     @Column(name = TABLE_ID)
     private int id;
 
+    @NotBlank
     private String name;
 
     @OneToMany(mappedBy = "role")

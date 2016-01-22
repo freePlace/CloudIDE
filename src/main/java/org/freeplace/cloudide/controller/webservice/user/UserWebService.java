@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * Created by Ruslan on 18.01.2016.
  */
@@ -23,7 +25,8 @@ public class UserWebService extends AbstractWebService{
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity createUser(@RequestBody User user) {
+    public ResponseEntity createUser(@Valid @RequestBody User user) {
+        int x =1;
         userService.createUser(user);
         // how to pass strings?! =)
         return new ResponseEntity<Integer>(1, HttpStatus.OK);

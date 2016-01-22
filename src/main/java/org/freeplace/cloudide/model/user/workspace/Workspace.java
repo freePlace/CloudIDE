@@ -2,6 +2,7 @@ package org.freeplace.cloudide.model.user.workspace;
 
 import org.freeplace.cloudide.model.AbstractEntity;
 import org.freeplace.cloudide.model.user.User;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,6 +19,9 @@ public class Workspace extends AbstractEntity {
     @GeneratedValue
     @Column(name = TABLE_ID)
     private int id;
+
+    @NotEmpty
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = User.TABLE_ID, nullable = false)
@@ -49,5 +53,13 @@ public class Workspace extends AbstractEntity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

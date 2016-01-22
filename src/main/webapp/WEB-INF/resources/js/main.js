@@ -50,7 +50,7 @@ mainModule.controller("userController", function($scope, $http) {
             alert(data);
         });
         responsePromise.error(function(data, status, headers, config) {
-            alert("AJAX failed!" + data + " " + status + " " + headers);
+            alert("AJAX failed!" + JSON.stringify(data) + " " + status + " " + headers);
         });
     }
 });

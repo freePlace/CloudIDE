@@ -14,11 +14,8 @@ body {
     padding-left: 5%;
     height: 20%;
 }
-#editor {
-    position: static;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 50%;
+
+#play:active {
+    transform:  translate(0px, 0px);
+    transition: all 1s;
 }
