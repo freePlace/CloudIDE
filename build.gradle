@@ -49,6 +49,14 @@ dependencies {
     // hibernate
     def hibernateVersion = '4.3.6.Final'
     compile "org.hibernate:hibernate-core:${hibernateVersion}"
+    //ehcache
+    compile ("org.hibernate:hibernate-ehcache:${hibernateVersion}"){
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
+
+    testCompile ("org.hibernate:hibernate-ehcache:${hibernateVersion}"){
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
 
     // validation api
     def hibernateValidatorVersion = '5.2.2.Final'
@@ -135,16 +143,17 @@ gradle.projectsEvaluated {
 task full(dependsOn: [test, tomcatRunWar]) << {
     println 'Done'
 }
-// configure second level cache
+
+// fix tests!
+// test and config second level cache
+// debug queries
 // add mock testing for service layer
 //add static code analysis tool
 //create auto dao generation task
 //separate web services in new module
 // use constructor injection!
-//add logging with aspects
 //create ONE datasource
-// create normal authorization service(using hibernate)
-// create validation layer
+// test authorization redirections
 //add facebook authorization
 // password encoding
 

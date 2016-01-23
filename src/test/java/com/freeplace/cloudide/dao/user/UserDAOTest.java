@@ -56,10 +56,10 @@ public class UserDAOTest extends AbstractDAOTest {
         user.setFirstName("FirstName");
         user.setLogin("Login");
         user.setPassword("3333");
+        user.setEmail("test@gmail.com");
         Role r = new Role();
         r.setName("ROLE_NEW");
         user.setRole(r);
         return user;
     }
-
 }

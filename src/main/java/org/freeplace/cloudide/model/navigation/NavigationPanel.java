@@ -1,6 +1,8 @@
 package org.freeplace.cloudide.model.navigation;
 
 import org.freeplace.cloudide.model.AbstractEntity;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.List;
  * Created by Ruslan on 18.01.2016.
  */
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "main")
 public class NavigationPanel extends AbstractEntity{
 
     public static final String TABLE_ID = "id_navigation_panel";

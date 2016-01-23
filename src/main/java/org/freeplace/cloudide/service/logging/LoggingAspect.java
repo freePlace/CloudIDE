@@ -33,11 +33,11 @@ public class LoggingAspect {
     public Object applicationAroundAdvice(ProceedingJoinPoint proceedingJoinPoint){
 
         LoggingEvent loggingEvent = new LoggingEvent();
-        loggingEvent.setContext(proceedingJoinPoint.toString());
+        loggingEvent.setContext(proceedingJoinPoint.getSourceLocation() + ", " + proceedingJoinPoint.getArgs());
 
         try {
             Object result = proceedingJoinPoint.proceed();
-            loggingEvent.setResult(result == null ? "Empty value" : result.toString());
+            loggingEvent.setResult(result == null ? "void" : result.toString());
             loggingEvent.setLoggingType(loggingTypeDAO.findOneByColumnValue("name", "DEBUG"));
             loggingEventDAO.create(loggingEvent);
             return result;

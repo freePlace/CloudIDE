@@ -1,10 +1,7 @@
 package org.freeplace.cloudide.service.user;
 
-import org.apache.commons.lang3.StringUtils;
-import org.codehaus.groovy.util.StringUtil;
 import org.freeplace.cloudide.configuration.security.Roles;
 import org.freeplace.cloudide.dao.user.RoleDAO;
-import org.freeplace.cloudide.dao.user.UserAccountDAO;
 import org.freeplace.cloudide.dao.user.UserDAO;
 import org.freeplace.cloudide.model.user.User;
 import org.freeplace.cloudide.service.authorization.ApplicationAuthenticationManager;
@@ -15,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
@@ -44,6 +40,7 @@ public class UserService {
             SecurityContextHolder.getContext().setAuthentication(result);
     }
 
+    @Loggable
     public void logout(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null){
@@ -51,19 +48,9 @@ public class UserService {
         }
     }
 
+    @Loggable
     public void createUser(User user) {
-        if(!validateUser(user)) throw new RuntimeException("Validation failed");
-
         user.setRole(roleDAO.findOneByColumnValue("name", Roles.ROLE_USER.name()));
         userDAO.create(user);
-    }
-
-    // TODO: create normal validation layer
-    private boolean validateUser(User user) {
-        if(StringUtils.isBlank(user.getEmail())) return false;
-        if(StringUtils.isBlank(user.getFirstName())) return false;
-        if(StringUtils.isBlank(user.getLastName())) return false;
-        if(StringUtils.isBlank(user.getLogin())) return false;
-        return !StringUtils.isBlank(user.getPassword());
     }
 }

@@ -12,7 +12,8 @@ import java.lang.reflect.Field;
 public abstract class AbstractEntity {
 
     @Override
-    public String toString() { return ToStringBuilder.reflectionToString(this,
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this,
             new ToStringStyle() {
                 protected void appendDetail(StringBuffer buffer, String fieldName, Object value) {
                     if (value instanceof AbstractEntity) buffer.append(((AbstractEntity) value).getId());

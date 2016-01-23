@@ -4,6 +4,7 @@ import org.freeplace.cloudide.model.AbstractEntity;
 import org.freeplace.cloudide.model.user.workspace.Workspace;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,6 +26,7 @@ public class User extends AbstractEntity {
     private String lastName;
 
     @Email
+    @NotEmpty
     private String email;
 
     @Length(min = 2, max = 15)
