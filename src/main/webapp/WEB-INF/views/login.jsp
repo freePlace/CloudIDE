@@ -39,10 +39,6 @@
       <div>
         <input type="submit" value="Log in">
       </div>
-      <a href="${pageContext.request.contextPath}/auth/facebook"><button class="btn btn-facebook"><i class="icon-facebook"></i> | facebook</button></a>
-      <form action="/auth/facebook" method="POST">
-        <button type="submit">Submit</button>
-      </form>
     </form>
     <a href="/auth/facebook">Get my Facebook profile</a>
   </div>
