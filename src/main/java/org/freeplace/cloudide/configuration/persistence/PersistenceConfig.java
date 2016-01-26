@@ -58,9 +58,9 @@ public class PersistenceConfig {
         properties.put(PROPERTY_HIBERNATE_SHOW_SQL, environment.getRequiredProperty(PROPERTY_HIBERNATE_SHOW_SQL));
         properties.put(PROPERTY_HIBERNATE_FORMAT_SQL, environment.getRequiredProperty(PROPERTY_HIBERNATE_FORMAT_SQL));
         properties.put(PROPERTY_HIBERNATE_HBM2DDL, environment.getRequiredProperty(PROPERTY_HIBERNATE_HBM2DDL));
-        properties.put(PROPERTY_USE_SECOND_LEVEL_CACHE, environment.getRequiredProperty(PROPERTY_USE_SECOND_LEVEL_CACHE));
-        properties.put(PROPERTY_CACHE_REGION_FACTORY_CLASS, environment.getRequiredProperty(PROPERTY_CACHE_REGION_FACTORY_CLASS));
-        properties.put(PROPERTY_EHCACHE_CONFIGURATION_RESOURCE_NAME, environment.getRequiredProperty(PROPERTY_EHCACHE_CONFIGURATION_RESOURCE_NAME));
+        //properties.put(PROPERTY_USE_SECOND_LEVEL_CACHE, environment.getRequiredProperty(PROPERTY_USE_SECOND_LEVEL_CACHE));
+      //  properties.put(PROPERTY_CACHE_REGION_FACTORY_CLASS, environment.getRequiredProperty(PROPERTY_CACHE_REGION_FACTORY_CLASS));
+    //    properties.put(PROPERTY_EHCACHE_CONFIGURATION_RESOURCE_NAME, environment.getRequiredProperty(PROPERTY_EHCACHE_CONFIGURATION_RESOURCE_NAME));
         return properties;
     }
 

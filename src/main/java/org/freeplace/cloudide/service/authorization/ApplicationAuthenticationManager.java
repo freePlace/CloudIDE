@@ -1,5 +1,6 @@
 package org.freeplace.cloudide.service.authorization;
 
+import org.freeplace.cloudide.configuration.security.Roles;
 import org.freeplace.cloudide.dao.user.UserDAO;
 import org.freeplace.cloudide.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,11 @@ public class ApplicationAuthenticationManager implements AuthenticationManager {
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(auth.getName(), auth.getCredentials(), null);
         authentication.setAuthenticated(false);
         return authentication;
+    }
+
+    public Authentication authenticateSocial() throws AuthenticationException {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(Roles.ROLE_USER.toString()));
+        return new UsernamePasswordAuthenticationToken("", "", authorities);
     }
 }

@@ -41,6 +41,12 @@ public class UserService {
     }
 
     @Loggable
+    public void authenticateSocial() {
+        Authentication result = applicationAuthenticationManager.authenticateSocial();
+        SecurityContextHolder.getContext().setAuthentication(result);
+    }
+
+    @Loggable
     public void logout(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null){
