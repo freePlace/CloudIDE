@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Ruslan on 18.01.2016.
  */
 @Entity
-//@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "main")
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "main")
 public class NavigationPanel extends AbstractEntity{
 
     public static final String TABLE_ID = "id_navigation_panel";

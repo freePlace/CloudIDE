@@ -9,6 +9,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.bmuschko:gradle-tomcat-plugin:2.0'
+        classpath group: 'org.zeroturnaround', name: 'gradle-jrebel-plugin', version: '1.1.2'
     }
 }
 
@@ -16,6 +17,7 @@ apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'com.bmuschko.tomcat'
+apply plugin: 'rebel'
 
 war.baseName = 'cloudIDE'
 
@@ -49,7 +51,11 @@ dependencies {
     // hibernate
     def hibernateVersion = '4.3.6.Final'
     compile "org.hibernate:hibernate-core:${hibernateVersion}"
+
     //ehcache
+ //   testCompile ("org.hibernate:hibernate-ehcache:${hibernateVersion}"){
+   //       exclude group: 'org.slf4j', module: 'slf4j-api'
+   // }
     compile ("org.hibernate:hibernate-ehcache:${hibernateVersion}"){
         exclude group: 'org.slf4j', module: 'slf4j-api'
     }
@@ -145,6 +151,7 @@ task setupData << {
 
 gradle.projectsEvaluated {
     test.dependsOn(setupData)
+    test.dependsOn(generateRebel)
 }
 
 task full(dependsOn: [test, tomcatRunWar]) << {
