@@ -37,7 +37,6 @@ public class AppController {
 
     @RequestMapping(value = Path.SLASH + Page.MAIN, method = RequestMethod.GET)
     public String getMainPage(Model m) {
-        if(true) throw new NullPointerException(111+"");
         m.addAttribute("navigationPanel", navigationPanelService.loadMainNavigationPanel());
         return Page.MAIN;
     }
