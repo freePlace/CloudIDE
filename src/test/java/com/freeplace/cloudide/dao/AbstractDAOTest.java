@@ -14,6 +14,7 @@ import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.operation.DatabaseOperation;
 import org.freeplace.cloudide.configuration.PersistenceConfigTest;
 import org.freeplace.cloudide.dao.AbstractDAO;
+import org.hibernate.ObjectNotFoundException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -57,14 +58,21 @@ public abstract class AbstractDAOTest extends AbstractTransactionalJUnit4SpringC
     protected void findByIdHelper(AbstractDAO dao) {
         Assert.assertNotNull(dao.findById(1));
         Assert.assertNotNull(dao.findById(2));
-        Assert.assertNull(dao.findById(3));
+
+        try {
+            dao.findById(3).getId();
+            Assert.fail();
+        } catch(ObjectNotFoundException e) { }
     }
 
     protected void deleteHelper(AbstractDAO dao) {
         int initSize = dao.findAll().size();
         int id = dao.findById(2).getId();
         dao.delete(dao.findById(2));
-        Assert.assertNull(dao.findById(id));
+        try {
+            dao.findById(id).getId();
+            Assert.fail();
+        } catch(ObjectNotFoundException e) { }
         Assert.assertEquals(initSize - 1, dao.findAll().size());
     }
 

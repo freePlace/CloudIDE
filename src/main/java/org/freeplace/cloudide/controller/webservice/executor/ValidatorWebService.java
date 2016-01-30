@@ -17,8 +17,12 @@ import org.springframework.web.bind.annotation.*;
 public class ValidatorWebService extends AbstractWebService {
     public static final String SERVICE_PATH = BASE_PATH + Path.SLASH + "validate";
 
-    @Autowired
     private ValidatorService validatorService;
+
+    @Autowired
+    public ValidatorWebService(ValidatorService validatorService) {
+        this.validatorService = validatorService;
+    }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody

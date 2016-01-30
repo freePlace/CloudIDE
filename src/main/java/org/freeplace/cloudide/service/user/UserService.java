@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Created by Ruslan on 02.12.2015.
@@ -23,14 +24,20 @@ import javax.transaction.Transactional;
 @Transactional
 public class UserService {
 
-    @Autowired
     private UserDAO userDAO;
 
-    @Autowired
     private RoleDAO roleDAO;
 
-    @Autowired
     private ApplicationAuthenticationManager applicationAuthenticationManager;
+
+    @Autowired
+    public UserService(UserDAO userDAO,
+                       RoleDAO roleDAO,
+                       ApplicationAuthenticationManager applicationAuthenticationManager) {
+        this.userDAO = userDAO;
+        this.roleDAO = roleDAO;
+        this.applicationAuthenticationManager = applicationAuthenticationManager;
+    }
 
     @Loggable
     public void authorize(String login, String password) {

@@ -1,8 +1,10 @@
 package org.freeplace.cloudide.model.navigation;
 
 import org.freeplace.cloudide.model.AbstractEntity;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 
 /**
  * Created by Ruslan on 18.01.2016.

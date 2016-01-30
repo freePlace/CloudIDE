@@ -18,8 +18,12 @@ import java.util.List;
 @ControllerAdvice
 public class ValidationErrorHandler {
 
-    @Autowired
     private MessageSource messageSource;
+
+    @Autowired
+    public ValidationErrorHandler(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

@@ -7,4 +7,21 @@
                 timeToIdleSeconds="300"
                 timeToLiveSeconds="600"
         />
+        <cache
+                name="org.hibernate.cache.internal.StandardQueryCache"
+                maxElementsInMemory="10000"
+                eternal="false"
+                timeToIdleSeconds="3600"
+                timeToLiveSeconds="3600" />
+
+        <cache
+                name="org.hibernate.cache.spi.UpdateTimestampsCache"
+                maxElementsInMemory="10000"
+                eternal="true" />
+        <defaultCache
+                maxElementsInMemory="10000"
+                eternal="false"
+                timeToLiveSeconds="86400"
+                overflowToDisk="false"
+                memoryStoreEvictionPolicy="LRU" />
 </ehcache>

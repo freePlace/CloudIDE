@@ -14,8 +14,6 @@ import org.freeplace.cloudide.model.logging.LoggingEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
-
 /**
  * Created by Ruslan on 17.01.2016.
  */
@@ -23,11 +21,15 @@ import javax.transaction.Transactional;
 @Aspect
 public class LoggingAspect {
 
-    @Autowired
     private LoggingEventDAO loggingEventDAO;
 
-    @Autowired
     private LoggingTypeDAO loggingTypeDAO;
+
+    @Autowired
+    public LoggingAspect(LoggingEventDAO loggingEventDAO, LoggingTypeDAO loggingTypeDAO) {
+        this.loggingEventDAO = loggingEventDAO;
+        this.loggingTypeDAO = loggingTypeDAO;
+    }
 
     @Around("@annotation("+ ApplicationData.PACKAGE_LOGGING +".Loggable)")
     public Object applicationAroundAdvice(ProceedingJoinPoint proceedingJoinPoint){

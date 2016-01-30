@@ -4,6 +4,7 @@ import com.freeplace.cloudide.dao.AbstractDAOTest;
 import org.dbunit.dataset.IDataSet;
 import org.freeplace.cloudide.dao.user.workspace.ResourceTypeDAO;
 import org.freeplace.cloudide.model.user.workspace.ResourceType;
+import org.hibernate.ObjectNotFoundException;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -41,7 +42,10 @@ public class ResourceTypeDAOTest extends AbstractDAOTest {
         resourceType.setIconPath(iconPath);
         resourceType.setName(name);
         Assert.assertEquals(2, resourceTypeDAO.findAll().size());
-        Assert.assertNull(resourceTypeDAO.findById(3));
+        try {
+            resourceTypeDAO.findById(3).getId();
+            Assert.fail();
+        } catch(ObjectNotFoundException e) { }
         resourceTypeDAO.create(resourceType);
         Assert.assertEquals(3, resourceTypeDAO.findAll().size());
         Assert.assertNotNull(resourceTypeDAO.findOneByColumnValue("iconPath", iconPath));

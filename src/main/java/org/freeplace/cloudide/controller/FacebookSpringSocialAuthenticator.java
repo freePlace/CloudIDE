@@ -1,6 +1,7 @@
 package org.freeplace.cloudide.controller;
 
 import org.freeplace.cloudide.applicationinfo.Path;
+import org.freeplace.cloudide.controller.constants.Page;
 import org.freeplace.cloudide.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
@@ -40,8 +41,12 @@ public class FacebookSpringSocialAuthenticator {
             properties.getProperty("facebook.app.id"),
             properties.getProperty("facebook.app.secret"));
 
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    public FacebookSpringSocialAuthenticator(UserService userService) {
+        this.userService = userService;
+    }
 
     @RequestMapping(Path.AUTH_FACEBOOK)
     public RedirectView startAuthentication(HttpSession session) {
@@ -62,7 +67,7 @@ public class FacebookSpringSocialAuthenticator {
         session.removeAttribute(STATE);
 
         if (!state.equals(stateFromSession)) return new RedirectView(Path.BACK + Path.BACK + Page.LOGIN);
-        Facebook fb = getFacebookApi(code);
+        //Facebook fb = getFacebookApi(code);
         userService.authenticateSocial();
         return new RedirectView(Path.BACK + Path.BACK + Page.MAIN);
     }

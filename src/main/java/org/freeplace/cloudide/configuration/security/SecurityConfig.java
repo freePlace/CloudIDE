@@ -5,7 +5,7 @@ package org.freeplace.cloudide.configuration.security;
  */
 import org.freeplace.cloudide.applicationinfo.ApplicationData;
 import org.freeplace.cloudide.applicationinfo.Path;
-import org.freeplace.cloudide.controller.Page;
+import org.freeplace.cloudide.controller.constants.Page;
 import org.freeplace.cloudide.controller.webservice.AbstractWebService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

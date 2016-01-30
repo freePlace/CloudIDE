@@ -21,8 +21,12 @@ import java.util.List;
 @Service
 public class ApplicationAuthenticationManager implements AuthenticationManager {
 
-    @Autowired
     private UserDAO userDAO;
+
+    @Autowired
+    public ApplicationAuthenticationManager(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
 
     public Authentication authenticate(Authentication auth) throws AuthenticationException {
         String login = auth.getName();

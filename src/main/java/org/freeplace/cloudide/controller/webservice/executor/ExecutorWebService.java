@@ -5,6 +5,8 @@ import org.freeplace.cloudide.controller.webservice.AbstractWebService;
 import org.freeplace.cloudide.controller.webservice.model.ExecutionModule;
 import org.freeplace.cloudide.service.executor.ExecutorService;
 import org.freeplace.cloudide.service.logging.Loggable;
+import org.freeplace.cloudide.service.navigation.NavigationPanelService;
+import org.freeplace.cloudide.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,12 @@ import org.springframework.web.bind.annotation.*;
 public class ExecutorWebService extends AbstractWebService {
     public static final String SERVICE_PATH = BASE_PATH + Path.SLASH + "execute";
 
-    @Autowired
     private ExecutorService executorService;
+
+    @Autowired
+    public ExecutorWebService(ExecutorService executorService) {
+        this.executorService = executorService;
+    }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody

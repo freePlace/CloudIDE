@@ -20,8 +20,12 @@ public class UserWebService extends AbstractWebService{
 
     public static final String SERVICE_PATH = BASE_PATH + Path.SLASH + "user";
 
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    public UserWebService(UserService userService) {
+        this.userService = userService;
+    }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody

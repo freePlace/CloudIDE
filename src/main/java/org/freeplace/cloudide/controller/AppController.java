@@ -1,6 +1,7 @@
 package org.freeplace.cloudide.controller;
 
 import org.freeplace.cloudide.applicationinfo.Path;
+import org.freeplace.cloudide.controller.constants.Page;
 import org.freeplace.cloudide.service.navigation.NavigationPanelService;
 import org.freeplace.cloudide.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,15 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping
 public class AppController {
 
-    @Autowired
     private UserService userService;
 
-    @Autowired
     private NavigationPanelService navigationPanelService;
+
+    @Autowired
+    public AppController(UserService userService, NavigationPanelService navigationPanelService) {
+        this.userService = userService;
+        this.navigationPanelService = navigationPanelService;
+    }
 
     @RequestMapping(value = Path.SLASH, method = RequestMethod.GET)
     public String getWelcomePage() {

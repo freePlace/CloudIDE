@@ -15,8 +15,12 @@ import javax.transaction.Transactional;
 @Service
 public class NavigationPanelService {
 
-    @Autowired
     private NavigationPanelDAO navigationPanelDAO;
+
+    @Autowired
+    public NavigationPanelService(NavigationPanelDAO navigationPanelDAO) {
+        this.navigationPanelDAO = navigationPanelDAO;
+    }
 
     @Transactional
     public NavigationPanel loadMainNavigationPanel() {

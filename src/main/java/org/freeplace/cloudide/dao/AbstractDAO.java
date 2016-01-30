@@ -4,13 +4,9 @@ import org.freeplace.cloudide.model.AbstractEntity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
-import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
-
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -35,7 +31,7 @@ public class AbstractDAO<T extends AbstractEntity, PK extends Serializable> {
 
     @SuppressWarnings("unchecked")
     public T findById(PK key) {
-        return (T) getSession().get(persistentClass, key);
+        return (T) getSession().load(persistentClass, key);
     }
 
     public void create(T entity) {

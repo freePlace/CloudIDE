@@ -2,6 +2,7 @@ package org.freeplace.cloudide.model.user;
 
 import org.freeplace.cloudide.model.AbstractEntity;
 import org.freeplace.cloudide.model.user.workspace.Workspace;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
