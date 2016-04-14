@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created by Ruslan on 15.01.2016.
  */
 public class ProgrammingLanguageDAOTest extends AbstractDAOTest {
-
+private int test;
     @Autowired
     private ProgrammingLanguageDAO programmingLanguageDAO;
 
